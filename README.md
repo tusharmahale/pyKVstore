@@ -16,7 +16,7 @@ $ cd pyKVStore
 $ python src/app.py
 ```
 Access Application
-  - [Add keys](http://localhost:8000/set)
+  - [Add New keys(POST)](http://localhost:8000/set)
   - [get key](http://localhost:8000/get/test)
   - [getall keys](http://localhost:8000/getall)
   - [Search key with prefix](http://localhost:8000/search?prefix=test)
