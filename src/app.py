@@ -1,4 +1,3 @@
-# import threading, time, os
 from flask import Flask, request, jsonify
 import urllib.request, urllib.error
 from prometheus_flask_exporter import PrometheusMetrics
