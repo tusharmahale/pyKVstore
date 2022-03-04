@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pyKVStore-deployment
+  labels:
+    app: pyKVStore
+spec:
+  replicas: 3
+  strategey:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: pyKVStore
+  template:
+    metadata:
+      labels:
+        app: pyKVStore
+    spec:
+      containers:
+        - name: pyKVStore
+          image: pyKVStore:1.0
+          ports:
+            - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pyKVStore
+spec:
+  selector:
+    app: pyKVStore
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: pyKVStore
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  ingressClassName: pyKVStore
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: pyKVStore
+                port:
+                  number: 80
