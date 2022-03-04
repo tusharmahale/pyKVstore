@@ -10,7 +10,7 @@ pip install -r requirements.txt
 
 ### How to Run
 
-Run the program (Make sure input.csv is in same directory from where you are running below command)
+Run the program
 ```sh
 $ cd pyKVStore
 $ python src/app.py
